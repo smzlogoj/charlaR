@@ -1,0 +1,1000 @@
+---
+title: "Usa R!"
+subtitle: "Una introducción a la programación"
+author: "José Antonio López Gómez"
+format: 
+    revealjs:
+        theme: simple
+        highlight-style: dracula
+---
+
+## ¿Qué es "programar"?
+
+Programar es el proceso de crear un conjunto de instrucciones para decirle a la computadora cómo realizar una tarea.
+
+## ¿Cómo programar?
+
+La tarea de "programar" no se centra exclusivamente en escribir código, si no que conlleva una serie de pasos previos antes de "codificar" las instrucciones.
+
+. . .
+
+-   Descomponer un problema complejo en partes más pequeñas.
+-   Reconocimiento de patrones repetitivos.
+-   Resolución de los problemas paso a paso.
+-   Escribir el código.
+
+## ¿Qué es un "lenguaje de programación"?
+
+Un lenguaje de programación es un lenguaje formal (es decir, un lenguaje con reglas gramaticales bien definidas) que proporciona al programador la capacidad y habilidad de escribir instrucciones o secuencias de órdenes para controlar el comportamiento de un sistema informático.
+
+## ¿El entorno de R?
+
+R es un conjunto integrado de software para la manipulación, cálculo y visualización de datos. Entre otras cosas tiene:
+
+-   Tratamiento y almacenamiento de datos eficaz.
+-   Conjunto de operadores para el calculo sobre matrices.
+-   Conjunto integrado de herramientas para el análisis y visualización de datos.
+-   Un simple y efectivo lenguaje de programación.
+-   Ampliamente utilizado en investigación cientifica.
+
+## ¿Qué es un "Programa"?
+
+Un programa informático es una secuencia de instrucciones basadas en un lenguaje de programación que el ordenador interpreta para resolver un problema.
+
+## ¿Cuales son los elementos básicos de un programa?
+
+. . .
+
+-   **Instrucciones:** conjunto de ordenes que indican al ordenador como realizar una tarea específica (asignar un valor a una variable, ejecutar un bucle que itera sobre una lista de datos).
+
+. . .
+
+-   **Funciones:** conjunto de instrucciones que permiten realizar una tarea específica (ANOVA, plot de datos, etc..). Se pueden imaginar como una máquina que toma ciertos datos, realiza una operación y devuelve un resultado.
+
+## ¿Cuales son los elementos básicos de un programa? {.smaller}
+
+-   **Datos:** pueden ser números, texto, imagénes, etc.. . En resumen cualquier tipo de información que el programa manipule. En general, son la razon de ser de muchas aplicaciones.
+
+. . .
+
+-   **Operadores:** son las herramientas que permiten realizar operaciones sobre los datos (sumar, multiplicar, comparar, asignar, etc..).
+
+. . .
+
+-   **Variables:** actuan como contenedores de información permitiendo que un programa conserve información y realice operaciones sobre esta información, en cierto modo se puede decir que son la "memoria" del programa.
+
+## "¡Hola Mundo!"
+
+El programa **"¡Hola Mundo!"** suele ser el primer ejercicio típico en la introducción del estudio de un lenguaje de programación.
+
+```{r}
+#| echo: true
+#| output-location: column-fragment
+saludo <- "¡Hola Mundo!"
+
+saludo
+```
+
+## Usando funciones
+
+##### - head()
+
+Para ilustrar el uso de la función **head()** utilizaremos el dataset [*iris*](https://es.wikipedia.org/wiki/Conjunto_de_datos_flor_iris) que viene con la instalación de **R-Base**.
+
+```{r}
+#| echo: true
+#| output-location: fragment
+df <- iris
+
+head(df)
+```
+
+## Usando funciones
+
+##### - pairs()
+
+Para ilustrar el uso de la función [**pairs()**](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/pairs) utilizaremos el dataset [*iris*](https://es.wikipedia.org/wiki/Conjunto_de_datos_flor_iris) que viene con la instalación de **R-Base**.
+
+```{r}
+#| echo: true
+#| output-location: column-fragment
+df <- iris
+
+pairs(df, col = df$Species)
+```
+
+## Estructuras de control de flujo {.smaller}
+
+Se llaman estructuras de control de flujo a las instrucciones que permiten controlar las acciones de un algoritmo o programa. Estas son de gran utilidad para determinar la lógica y el orden en que ocurren las operaciones.
+
+-   **if, else:** if("si") es usado cuando deseamos que una operación se ejecute únicamente cuando una condición se cumple. else("de otro modo") es usado para indicar que hacer en cado de que la condición de un if no se cumpla.
+
+-   **for:** nos permite ejecutar un bucle, realizando una misma operación para cada elemento de un conjunto de datos.
+
+## if, else
+
+```{r}
+#| echo: true
+#| output-location: fragment
+variable_1 <- 5
+
+if (variable_1 >10) {
+    print('la variable_1 es mayor que 10')
+} else {
+    print('la variable_1 NO es mayor que 10 ')
+}
+```
+
+## for
+
+```{r}
+#| echo: true
+#| output-location: fragment
+estaciones <- c('primavera', 'verano', 'otoño', 'invierno')
+
+for(estacion in estaciones){
+    print(toupper(estacion))
+}
+```
+
+## Variables
+
+Las variables actuan como contenedores de información ("memoria") del programa. La estructura de esa información es muy heterogenea, podemos tener información simple(el número 5, el texto "¡Hola Mundo!", etc..) o mucho más compleja (matriz de RNA-seq, con miles de filas y columnas).
+
+En base al tipo de información que contienen las variables las podemos clasificar en simples o complejas.
+
+## Variables simples {.smaller}
+
+| Tipo de dato | Descripción                        | Definición           |
+|--------------|------------------------------------|----------------------|
+| Numeric      | Números decimales                  | numero \<- 1.0       |
+| Integer      | Números enteros                    | entero \<- 1         |
+| Character    | Cadenas de texto                   | texto \<- "un texto" |
+| Complex      | Números complejos                  | complejo \<- 3 + 2i  |
+| Logical      | TRUE o FALSE                       | 5 \< 6; 5 == 5       |
+| Factor       | Es una variable de tipo categórica |                      |
+
+## Variables complejas {.smaller}
+
+La estructura de la información contenida en estas variables es más compleja. Además estas variables tienen métodos y atributos que facilitan acceder a la información que contienen.
+
+-   **Vectores:** Los vectores almacena una secuencia de valores simples todos del mismo tipo.
+
+-   **Listas:** A diferencia de los vectores las listas es una colección de elementos que pueden ser de diferente tipo.
+
+-   **Matrices:**Una matriz es una estructura bidimensional que almacena números.
+
+-   **Data Frames:** Un Data Frame es una estructura bidimensional que puede almacenar tipos de datos mixtos.
+
+## Vectores
+
+La forma más habitual de crear un vector es usando la función **c()**
+
+```{r}
+#| echo: true
+#| output-location: fragment
+vector_numeros <- c(2, 4, 6, 8)
+vector_numeros
+```
+
+```{r}
+#| echo: true
+#| output-location: fragment
+seq_numeros <- 10:20
+seq_numeros
+```
+
+```{r}
+#| echo: true
+#| output-location: fragment
+comb_vect <- c(vector_numeros, seq_numeros)
+comb_vect
+```
+
+## Aritmética de Vectores
+
+Las operaciones aritméticas con vectores se realizan posición a posición.
+
+```{r}
+#| echo: true
+#| output-location: fragment
+vector_numeros <- seq(10, 50, by = 5)
+vector_numeros
+vector_numeros + 1
+vector_numeros / 2
+```
+
+## Aritmetica de Vectores
+
+Dos vectores
+
+```{r}
+#| echo: true
+#| output-location: fragment
+vector_numeros_1 <- c(1, 2, 3, 4)
+vector_numeros_2 <- c(1, 1, 0, 0)
+vector_numeros_1 - vector_numeros_2
+vector_numeros_1 * vector_numeros_2
+```
+
+## Aritmetica de Vectores
+
+Vectores texto y números
+
+```{r}
+#| echo: true
+#| output-location: fragment
+letras <- c('A', 'B', 'C', 'D')
+numeros <- c(1, 2, 3, 4)
+paste0(letras, numeros)
+paste0(numeros, letras)
+```
+
+## Elementos vector
+
+```{r}
+#| echo: true
+#| output-location: fragment
+numeros <- 10:20
+numeros
+
+numeros[4]
+numeros[-4]
+numeros[c(4:8)]
+numeros[-c(4:8)]
+numeros[c(2, 10)]
+```
+
+## Elementos vector
+
+```{r}
+#| echo: true
+#| output-location: fragment
+numeros <- 10:20
+numeros
+
+numeros[-c(4:8)]
+
+```
+
+. . .
+
+```{r}
+#| echo: true
+#| output-location: fragment
+numeros <- numeros[-c(4:8)]
+numeros
+```
+
+. . .
+
+```{r}
+#| echo: true
+#| output-location: fragment
+numeros <- c(numeros, c(1, 2, 3))
+numeros
+```
+
+. . .
+
+```{r}
+#| echo: true
+#| output-location: fragment
+numeros <- numeros[order(numeros, decreasing = TRUE)]
+numeros
+```
+
+## Máscara lógica
+
+```{r}
+#| echo: true
+#| output-location: fragment
+numeros <- 10:20
+numeros
+
+numeros < 15
+numeros[numeros < 15]
+```
+
+. . .
+
+```{r}
+#| echo: true
+#| output-location: fragment
+mascara_logica <- numeros == 10
+mascara_logica
+!mascara_logica
+numeros[!mascara_logica]
+```
+
+## Conclusión {.smaller}
+
+Para seleccionar subconjuntos de datos lo podemos realizar de dos formas:
+
+-   **Vector de índices**
+
+```{r}
+#| echo: true
+#| output-location: fragment
+numeros <- runif(10, min = 1, max = 1000)
+numeros
+
+numeros[c(1, 5, 10)]
+```
+
+-   **Máscara lógica**
+
+```{r}
+#| echo: true
+#| output-location: fragment
+numeros[numeros < 500]
+```
+
+## Data Frame {.smaller}
+
+Un data frame es una estructura de datos bidimensional pudiendo almacenar datos mixtos(texto, números, etc ..). Un data frame es una lista de vectores (columnas) de la misma longitd.
+
+```{r}
+#| echo: true
+#| output-location: fragment
+df <- iris
+
+dim(df)
+head(df)
+summary(df)
+```
+
+## Structure of an Arbitrary R Object {.smaller}
+
+La función [**str()**](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/str) muestra la estructura interna de un Objeto(variable compleja) de R.
+
+```{r}
+#| echo: true
+#| output-location: fragment
+df <- iris
+
+str(df)
+```
+
+. . .
+
+```{r}
+#| echo: true
+#| output-location: fragment
+df$Sepal.Length
+```
+
+## Seleccionar una columna {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+df$Sepal.Length
+df[, c('Sepal.Length')]
+df[, c(1)]
+```
+
+## Seleccionar varias filas y columnas {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+df[1:10, c('Sepal.Length', 'Species')]
+df[c(30, 40, 100), c(5, 2, 4)]
+```
+
+## Subset {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+df[df$Species == 'versicolor' & df$Sepal.Length > 6, ]
+```
+
+## Columnas {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+df$Sepal.Ratio <- df$Sepal.Length / df$Sepal.Width
+df$Petal.Ratio <- df$Petal.Length / df$Petal.Width
+head(df, 3)
+```
+
+. . .
+
+```{r}
+#| echo: true
+#| output-location: fragment
+df.ratio <- df[, c('Species', 'Sepal.Ratio', 'Petal.Ratio')]
+head(df.ratio, 3)
+```
+
+. . .
+
+```{r}
+#| echo: true
+#| output-location: fragment
+df$Sepal.Ratio <- NULL
+df$Petal.Ratio <- NULL
+head(df, 3)
+```
+
+## Crear dataframe {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+df.ratio <- data.frame(
+                Species = df$Species,
+                Sepal.Ratio = df$Sepal.Length / df$Sepal.Width,
+                Petal.Ratio = df$Petal.Length / df$Petal.Width
+            )
+head(df.ratio)
+```
+
+# ggplot2
+
+## ¿Qué es ggplot2?
+**ggplot2** es un paquete de R para producir visualizaciones de datos. A diferencia de otros paquetes graficos, **ggplot2** usa un framework conceptual basado en la gramática de los gráficos. Esto permite crear gráficos de diferentes elementos, en lugar de estar limitados a un conjunto de gráficos predeterminados.
+A día de hoy es el lider indiscutible en representaciones gráficas en R.
+
+## Estructura
+Existen 7 elementos que se unen como un conjunto de instrucciones para dibujar un gráfico. Un gráfico presenta al menos tres elementos: Data, mapping, layer.
+
+![](capas.png){width=70%}
+
+
+## Estructura {.smaller}
+* **Data:** Los datos que se van a representar, generalmente será un data frame.
+
+* **Mappings:**Características estéticas (aes) que describiran cómo queremos que los datos se vean en el gráfico (posición, color, relleno, forma, tamaño, etc..).
+
+* **Layers:** Es la capa que muestra como aparecen los datos. Cada una de ellas tiene 3 partes importantes:
+    - **Geometría:** (geom) Determina como se muestra cada punto, linea, etc..
+    - **Transformación estadisticas:** (stat) Que puede computar nuevas variables de los datos.
+    - **Ajuste de posición:** Determina donde se muestra cada parte de datos.
+
+## Instalación
+El paquete ggplot2 no se encuentra en R-base, para su uso es necesario descargarlo e instalarlo desde los repositorios de [**CRAN**](https://cran.r-project.org/).
+
+```{.r}
+install.packages('ggplot2')
+```
+Para poder usarlo hay que cargarlo en el sistema usando la función **library()**
+
+```{r}
+#| echo: true
+#| output-location: fragment
+library('ggplot2')
+```
+
+
+## Diamonds {.smaller}
+En el paquete ggplot2 esta incluido el dataset Diamonds que contiene el precio y otros atributos de 54.000 diamantes.
+```{r}
+#| echo: true
+#| output-location: fragment
+library('ggplot2')
+df <- diamonds
+summary(df)
+```
+
+## Scatterplot {.smaller}
+Vamos a representar carat (quilates) vs price
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(x = carat, y = price)) +
+    geom_point()
+```
+## Scatterplot  {.smaller}
+Añadimos un tema y cambiamos el color de los puntos
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(x = carat, y = price)) +
+    geom_point(color = 'steelblue') +
+    theme_bw()
+```
+## Scatterplot  {.smaller}
+Coloreamos los puntos agrupados por la variable cut. Además movemos la leyenda a la parte superior 
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(x = carat, y = price)) +
+    geom_point(aes(color = cut)) +
+    theme_bw() +
+    theme(legend.position = 'top')
+```
+
+## Scatterplot  {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(x = carat, y = price)) +
+    geom_point(aes(color = cut)) +
+    theme_bw() +
+    theme(legend.position = 'top') +
+    facet_wrap(~ cut)
+```
+
+## Boxplot {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(y = price)) +
+    geom_boxplot()
+```
+## Boxplot {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(x = cut, y = price)) +
+    geom_boxplot(color = 'navy') +
+    theme_bw()
+```
+## Boxplot {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(x = cut, y = price)) +
+    geom_boxplot(aes(fill = cut), color = 'navy') +
+    theme_bw() +
+    theme(legend.position = 'top')
+```
+
+## Boxplot {.smaller}
+Añadimos una 3ª variable, la variable 'color'
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(x = cut, y = price)) +
+    geom_boxplot(aes(fill = color), color = 'navy') +
+    theme_bw() +
+    theme(legend.position = 'top')
+```
+## Boxplot {.smaller}
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(x = cut, y = price)) +
+    geom_boxplot(aes(fill = color), color = 'navy') +
+    theme_bw() +
+    theme(legend.position = 'top') +
+    facet_wrap(~ color)
+```
+
+## Bar Chart {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(x = clarity)) +
+    geom_bar(color = 'navy', fill = 'white') +
+    theme_bw()
+```
+## Bar Chart {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(x = clarity)) +
+    geom_bar(aes(color = clarity, fill = clarity)) +
+    theme_bw() +
+    theme(legend.position = 'top')
+```
+## Bar Chart {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(x = clarity)) +
+    geom_bar(aes(color = cut, fill = cut)) +
+    theme_bw() +
+    theme(legend.position = 'top')
+```
+## Bar Chart {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+ggplot(df, aes(x = clarity)) +
+    geom_bar(aes(color = cut, fill = cut), position = position_dodge()) +
+    theme_bw() +
+    theme(legend.position = 'top')
+```
+
+
+# RNA-seq
+
+ ![](rna-seq-pipeline.png){fig-align="center"}
+
+
+## Drosophila melanogaster {.smaller}
+
+Para el análisis de expresión diferencial vamos a utilizar el paquete [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html).
+
+Debemos familiarizarnos con la función a usar:
+
+* [Manual de referencia](https://bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf)
+* [Vignettes](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html)
+
+La función **DESeq()** recibe como paramatro un objeto de la clase **DESeqDataSet**. Este tipo de variable almacena los valores de entrada, calculos intermedios y resultados del análisis.
+
+```{.r}
+dds <- DeSeqDataSetFromMatrix(countData, colData, design)
+```
+
+* countData: Es una matriz númerica (muestras en columnas).
+* colData: DataFrame con al menos una columna, las filas corresponden a las columnas del countData.
+* design: Expresa como las cuentas para cada gen dependen de las variables en colData.
+
+
+## Drosophila Melanogaster {.smaller}
+
+ ![](FlowChart.png){width="80%"}
+
+## Raw counts {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+df <- read.csv('data/mcf_count_table.csv')
+
+dim(df)
+
+head(df)
+```
+
+## Metadatos {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+metadata <- read.csv('data/mcf_metadata.csv')
+dim(metadata)
+
+head(metadata, 20)
+```
+
+## Fenotipos seleccionados {.smaller}
+
+Queremos seleccionar las muestras que corresponden con el stage 'L1Larvae' y 'L2Larvae'.
+
+```{r}
+#| echo: true
+#| output-location: fragment
+fenotipos <- c('L1Larvae', 'L2Larvae')
+
+df.fenotipos <- metadata[metadata$stage %in% fenotipos, c('sample.id', 'stage')]
+
+df.fenotipos$stage <- as.factor(df.fenotipos$stage)
+
+df.fenotipos
+```
+
+## Filtrar el dataset por las muestras seleccionadas {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+head(names(df), 15)
+```
+
+. . .
+
+```{r}
+#| echo: true
+#| output-location: fragment
+df.sub <- df[, df.fenotipos$sample.id]
+
+head(df.sub)
+```
+
+## Añadir genes {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+rownames(df.sub) <- df$gene
+
+head(df.sub)
+```
+
+## *TIP* {.smaller}
+
+``` r
+fenotipos <- c('L1Larvae', 'L2Larvae')
+df.fenotipos <- metadata[metadata$stage %in% fenotipos, c('sample.id', 'stage')]
+
+df.sub <- df[, df.fenotipos$sample.id]
+rownames(df.sub) <- df$gene
+```
+
+. . .
+
+#### ¿No es más sencillo?
+
+``` r
+df.sub <- df[, c('SRX008026', 'SRX008174 ', 'SRX008201', 'SRX008239', 'SRX008008 ', 
+                 ' SRX008168', 'SRX008211', 'SRX008255', 'SRX008261')]
+rownames(df.sub) <- df$gene
+```
+
+## Eliminar genes con pocas counts {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+head(rowSums(df.sub))
+```
+
+. . .
+
+```{r}
+#| echo: true
+#| output-location: fragment
+keep <- rowSums(df.sub) >= 10
+head(keep)
+```
+
+. . .
+
+```{r}
+#| echo: true
+#| output-location: fragment
+df.sub  <- df.sub [keep, ]
+head(df.sub)
+dim(df.sub)
+```
+
+## DESeq2 {.smaller}
+
+Para el análisis de expresión diferencial vamos a utilizar el paquete [**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html).
+
+Vignettes: [Analyzing RNA-seq data with DESeq2](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html)
+
+``` r
+install.packages("BiocManager")
+```
+
+. . .
+
+``` r
+BiocManager::install("DESeq2")
+```
+
+## DESeq2 {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+library(DESeq2)
+coldata <- data.frame(stage = df.fenotipos$stage)
+rownames(coldata) <- df.fenotipos$sample.id
+head(coldata)
+```
+
+. . .
+
+```{r}
+#| echo: true
+#| output-location: fragment
+dds <- DESeqDataSetFromMatrix(
+                    countData = df.sub,
+                    colData = coldata,
+                    design = ~stage
+            )
+
+dds
+```
+
+## DESeq2 {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+dds <- DESeq(dds)
+dds
+```
+
+. . .
+
+```{r}
+#| echo: true
+#| output-location: fragment
+res <- results(dds, contrast = c('stage', 'L1Larvae', 'L2Larvae'))
+res
+```
+
+## Guardar resultados {.smaller}
+
+Guardamos los resultados del análisis diferencial y los datos normalizados
+
+```{r}
+#| echo: true
+#| output-location: fragment
+write.csv(res, 'data/DGE.csv')
+
+rld <- assay(rlog(dds, blind = FALSE))
+write.csv(rld, 'data/normalized_counts.csv')
+```
+
+## Volcano Plot {.smaller}
+Vamos a realizar el volcano plot correspondiente al análisis diferencial de los datos de Drosophila melanogaster.
+Eliminamos las filas con NA values
+
+```{r}
+#| echo: true
+#| output-location: fragment
+dge <- read.csv('data/DGE.csv')
+
+dge <- dge[complete.cases(dge), ]
+
+head(dge)
+```
+## Volcano Plot {.smaller}
+Seleccionamos los valores de FC = 2 y padj = 0.0000001 de corte.
+
+```{r}
+#| echo: true
+#| output-location: fragment
+padj.cutoff <- 0.0000001
+lfc.cutoff <- log2(2)
+```
+. . .
+```{r}
+#| echo: true
+#| output-location: fragment
+dge$class <- 'none'
+dge[dge$log2FoldChange >= lfc.cutoff & dge$padj <= padj.cutoff, c('class')] <- 'UP'
+dge[dge$log2FoldChange <= -1 * lfc.cutoff & dge$padj <= padj.cutoff, c('class')] <- 'DOWN'
+
+head(dge)
+```
+## Volcano Plot {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+ggplot(dge, aes(x = log2FoldChange, y = -1 * log10(padj))) +
+    geom_point() +
+    theme_bw()
+```
+
+## Volcano Plot {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+ggplot(dge, aes(x = log2FoldChange, y = -1 * log10(padj))) +
+    geom_point() +
+    geom_hline(yintercept = -1 * log10(padj.cutoff ), linetype="dashed", 
+                              color = "black", linewidth = 0.2) +
+    geom_vline(xintercept=c(-1 * lfc.cutoff ,lfc.cutoff ), linetype="dashed", 
+                              color = "black", linewidth = 0.2) +
+    theme_bw()
+```
+## Volcano Plot {.smaller}
+```{r}
+#| echo: true
+#| output-location: fragment
+ggplot(dge, aes(x = log2FoldChange, y = -1 * log10(padj))) +
+    geom_point(aes(color = class)) +
+    geom_hline(yintercept = -1 * log10(padj.cutoff ), linetype="dashed", 
+                              color = "black", linewidth = 0.2) +
+    geom_vline(xintercept=c(-1 * lfc.cutoff ,lfc.cutoff ), linetype="dashed", 
+                              color = "black", linewidth = 0.2) +
+    theme_bw()
+```
+
+## Volcano Plot {.smaller}
+
+ ![](volcano.png){fig-align="center"}
+
+## TOP Genes
+```{r}
+#| echo: true
+#| output-location: fragment
+dge <- dge[order(dge$log2FoldChange, decreasing = TRUE), ]
+genes.up <- dge[1:40, c('X')]
+genes.down <- dge[(nrow(dge) - 30):nrow(dge), c('X')]
+
+genes.up
+genes.down
+```
+## TOP Genes
+```{r}
+#| echo: true
+#| output-location: fragment
+df.norm <- read.csv('data/normalized_counts.csv')
+head(df.norm)
+```
+. . .
+```{r}
+#| echo: true
+#| output-location: fragment
+df.norm <- df.norm[df.norm$X %in% c(genes.up, genes.down), ]
+rownames(df.norm) <- df.norm$X
+df.norm$X <- NULL
+dim(df.norm)
+```
+## Heatmap {.smaller}
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| fig-height: 12
+library(pheatmap)
+
+pheatmap(df.norm)
+```
+## Heatmap {.smaller}
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| fig-height: 12
+
+pheatmap(df.norm,
+        scale = 'row'
+)
+```
+## Heatmap {.smaller}
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| fig-height: 10
+
+pheatmap(df.norm,
+        scale = 'row',
+        cutree_cols =  2,
+        cutree_rows = 2,
+        color = colorRampPalette(
+            c("steelblue", 
+                "white", 
+                "firebrick3")
+            )(100),
+)
+```
+## Heatmap {.smaller}
+```{r}
+coldata <- data.frame(stage = c(rep('L1Larvae', 4), rep('L2larvae', 5)))
+rownames(coldata) <- names(df.norm)
+```
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| fig-height: 10
+
+pheatmap(df.norm,
+        scale = 'row',
+        cutree_cols =  2,
+        cutree_rows = 2,
+        color = colorRampPalette(
+            c("steelblue", 
+                "white", 
+                "firebrick3")
+            )(100),
+        annotation_col = coldata
+)
+```
