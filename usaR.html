@@ -848,12 +848,12 @@ José Antonio López Gómez
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 390.69636  91.55886 400.36766  18.82134  58.77934 777.34194 401.86908
- [8] 999.02966 860.30750 188.44371</code></pre>
+<pre><code> [1] 349.54000 900.45579 188.39879 948.19098 183.07508  32.72001 184.52491
+ [8]  71.37823 652.86343 303.05080</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href=""></a>numeros[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 390.69636  58.77934 188.44371</code></pre>
+<pre><code>[1] 349.5400 183.0751 303.0508</code></pre>
 </div>
 </div>
 <ul>
@@ -864,7 +864,7 @@ José Antonio López Gómez
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 390.69636  91.55886 400.36766  18.82134  58.77934 401.86908 188.44371</code></pre>
+<pre><code>[1] 349.54000 188.39879 183.07508  32.72001 184.52491  71.37823 303.05080</code></pre>
 </div>
 </div>
 </section>
@@ -2217,6 +2217,188 @@ FBgn0261575 1.45364e-12</code></pre>
 <div>
 <figure>
 <p><img data-src="usaR_files/figure-revealjs/unnamed-chunk-73-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></div>
+</section>
+<section id="convertir-ensembl-id" class="slide level2 smaller">
+<h2>Convertir Ensembl ID</h2>
+<p>Convertir <strong>Ensembl ID</strong> a gene <strong>Symbol</strong>. En este caso vamos a usar el paquete de Bioconductor <a href="https://www.bioconductor.org/packages/release/data/annotation/html/org.Dm.eg.db.html"><strong>org.Dm.eg.db</strong></a></p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb175-1"><a href=""></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"BiocManager"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb175-2"><a href=""></a>    <span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
+<span id="cb175-3"><a href=""></a></span>
+<span id="cb175-4"><a href=""></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"org.Dm.eg.db"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="convertir-ensembl-id-1" class="slide level2 smaller">
+<h2>Convertir Ensembl ID</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb176"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb176-1"><a href=""></a><span class="fu">library</span>(org.Dm.eg.db)</span>
+<span id="cb176-2"><a href=""></a></span>
+<span id="cb176-3"><a href=""></a><span class="fu">keytypes</span>(org.Dm.eg.db)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "ACCNUM"       "ALIAS"        "ENSEMBL"      "ENSEMBLPROT"  "ENSEMBLTRANS"
+ [6] "ENTREZID"     "ENZYME"       "EVIDENCE"     "EVIDENCEALL"  "FLYBASE"     
+[11] "FLYBASECG"    "FLYBASEPROT"  "GENENAME"     "GENETYPE"     "GO"          
+[16] "GOALL"        "MAP"          "ONTOLOGY"     "ONTOLOGYALL"  "PATH"        
+[21] "PMID"         "REFSEQ"       "SYMBOL"       "UNIPROT"     </code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb178"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb178-1"><a href=""></a><span class="fu">head</span>(df.norm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>            SRX008026 SRX008174 SRX008201 SRX008239 SRX008008 SRX008168
+FBgn0005664  3.390268  3.059294  3.155849  3.232990  2.144275  2.294787
+FBgn0019929  2.901322  2.304819  2.488022  2.807908  1.612151  2.042531
+FBgn0023495  9.633051  9.577708  9.684807  9.638600  5.267098  5.588959
+FBgn0027527  9.703935  9.691499  9.658475  9.676821 16.007267 15.986325
+FBgn0029170  5.482906  5.690644  5.460526  5.213541 11.392358 11.355739
+FBgn0029807  7.666622  7.767764  7.550528  7.628344 13.917147 13.865120
+            SRX008211 SRX008255 SRX008261
+FBgn0005664  2.319074  2.065605  2.476389
+FBgn0019929  1.955478  1.774538  2.101436
+FBgn0023495  5.401580  5.415401  5.641509
+FBgn0027527 15.959139 16.052966 16.100431
+FBgn0029170 11.272644 11.427397 11.469701
+FBgn0029807 13.851571 13.892522 13.936287</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="convertir-ensembl-id-2" class="slide level2 smaller">
+<h2>Convertir Ensembl ID</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb180"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb180-1"><a href=""></a>genes.names <span class="ot">&lt;-</span> <span class="fu">mapIds</span>(org.Dm.eg.db, </span>
+<span id="cb180-2"><a href=""></a>                      <span class="at">keys =</span> <span class="fu">rownames</span>(df.norm), </span>
+<span id="cb180-3"><a href=""></a>                      <span class="at">keytype =</span> <span class="st">'ENSEMBL'</span>, </span>
+<span id="cb180-4"><a href=""></a>                      <span class="at">column =</span> <span class="st">'SYMBOL'</span>)</span>
+<span id="cb180-5"><a href=""></a></span>
+<span id="cb180-6"><a href=""></a>genes.names</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>FBgn0005664 FBgn0019929 FBgn0023495 FBgn0027527 FBgn0029170 FBgn0029807 
+     "Crys"      "Ser7"      "Lip3"      "Osi6"     "TwdlT"    "CG3108" 
+FBgn0030390 FBgn0030459 FBgn0030543 FBgn0030570 FBgn0030828 FBgn0030830 
+  "CG15731"   "CG12723"   "CG11585"   "CG12540"    "CG5162"    "CG5172" 
+FBgn0030921 FBgn0031276 FBgn0031277 FBgn0031467 FBgn0031940 FBgn0033404 
+   "CG6290"   "CG12506"   "CG13947"    "Cpr23B"    "CG7214"     "Or45a" 
+FBgn0033658 FBgn0034092 FBgn0034828 FBgn0035022 FBgn0035661 FBgn0035865 
+ "Twdlbeta"    "CG7798"   "CG13545"   "CG11413"   "CG10477"    "CG7201" 
+FBgn0036131 FBgn0036351 FBgn0036394 FBgn0036417 FBgn0036470 FBgn0036593 
+  "CG12522"   "CG14107"    "CG9040"    "CG7906"     "EAChm"   "CG13048" 
+FBgn0036596 FBgn0036879 FBgn0037177 FBgn0037179 FBgn0037204 FBgn0037224 
+  "CG13045"   "Cpr76Bb"   "CG14454"   "CG14453"   "CG11131"     "TwdlF" 
+FBgn0037288 FBgn0037414 FBgn0037416 FBgn0037420 FBgn0037424 FBgn0037428 
+    "Jhbp3"      "Osi7"      "Osi9"   "CG15597"     "Osi15"     "Osi18" 
+FBgn0037429 FBgn0037430 FBgn0038007 FBgn0038148 FBgn0038160 FBgn0038242 
+    "Osi19"     "Osi20"  "Cyp313a3"   "CG14377"    "CG9759"   "CG14852" 
+FBgn0038315 FBgn0038394 FBgn0038505 FBgn0038819 FBgn0039027 FBgn0039083 
+  "CG14866"     "Jhbp4"   "CG17283"    "Cpr92F"    "CG7031"   "CG10177" 
+FBgn0039264 FBgn0039299 FBgn0039443 FBgn0039448 FBgn0039483 FBgn0040393 
+  "CG11786"   "CG11854"     "TwdlS"     "TwdlQ"   "CG14259"   "CG14265" 
+FBgn0040553 FBgn0040743 FBgn0051560 FBgn0052073 FBgn0052453 FBgn0052548 
+  "CG14374"   "CG15919"   "CG31560"   "CG32073"   "CG14454"   "CG32548" 
+FBgn0052855 FBgn0053270 FBgn0085232 FBgn0085307 FBgn0243586 
+  "CG32855"   "CG33270"   "CG34203"   "CG34278"        "Tb" </code></pre>
+</div>
+</div>
+</section>
+<section id="convertir-ensembl-id-3" class="slide level2 smaller">
+<h2>Convertir Ensembl ID</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb182"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb182-1"><a href=""></a>genes.names <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(genes.names)</span>
+<span id="cb182-2"><a href=""></a></span>
+<span id="cb182-3"><a href=""></a><span class="fu">head</span>(genes.names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>            genes.names
+FBgn0005664        Crys
+FBgn0019929        Ser7
+FBgn0023495        Lip3
+FBgn0027527        Osi6
+FBgn0029170       TwdlT
+FBgn0029807      CG3108</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb184"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb184-1"><a href=""></a><span class="fu">head</span>(df.norm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>            SRX008026 SRX008174 SRX008201 SRX008239 SRX008008 SRX008168
+FBgn0005664  3.390268  3.059294  3.155849  3.232990  2.144275  2.294787
+FBgn0019929  2.901322  2.304819  2.488022  2.807908  1.612151  2.042531
+FBgn0023495  9.633051  9.577708  9.684807  9.638600  5.267098  5.588959
+FBgn0027527  9.703935  9.691499  9.658475  9.676821 16.007267 15.986325
+FBgn0029170  5.482906  5.690644  5.460526  5.213541 11.392358 11.355739
+FBgn0029807  7.666622  7.767764  7.550528  7.628344 13.917147 13.865120
+            SRX008211 SRX008255 SRX008261
+FBgn0005664  2.319074  2.065605  2.476389
+FBgn0019929  1.955478  1.774538  2.101436
+FBgn0023495  5.401580  5.415401  5.641509
+FBgn0027527 15.959139 16.052966 16.100431
+FBgn0029170 11.272644 11.427397 11.469701
+FBgn0029807 13.851571 13.892522 13.936287</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="convertir-ensembl-id-4" class="slide level2 smaller">
+<h2>Convertir Ensembl ID</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb186"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb186-1"><a href=""></a>df.norm.names <span class="ot">&lt;-</span> <span class="fu">merge</span>(df.norm, genes.names, <span class="at">by =</span> <span class="st">'row.names'</span>)</span>
+<span id="cb186-2"><a href=""></a></span>
+<span id="cb186-3"><a href=""></a><span class="fu">head</span>(df.norm.names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>    Row.names SRX008026 SRX008174 SRX008201 SRX008239 SRX008008 SRX008168
+1 FBgn0005664  3.390268  3.059294  3.155849  3.232990  2.144275  2.294787
+2 FBgn0019929  2.901322  2.304819  2.488022  2.807908  1.612151  2.042531
+3 FBgn0023495  9.633051  9.577708  9.684807  9.638600  5.267098  5.588959
+4 FBgn0027527  9.703935  9.691499  9.658475  9.676821 16.007267 15.986325
+5 FBgn0029170  5.482906  5.690644  5.460526  5.213541 11.392358 11.355739
+6 FBgn0029807  7.666622  7.767764  7.550528  7.628344 13.917147 13.865120
+  SRX008211 SRX008255 SRX008261 genes.names
+1  2.319074  2.065605  2.476389        Crys
+2  1.955478  1.774538  2.101436        Ser7
+3  5.401580  5.415401  5.641509        Lip3
+4 15.959139 16.052966 16.100431        Osi6
+5 11.272644 11.427397 11.469701       TwdlT
+6 13.851571 13.892522 13.936287      CG3108</code></pre>
+</div>
+</div>
+</section>
+<section id="heatmap-4" class="slide level2 smaller">
+<h2>Heatmap</h2>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb188"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb188-1"><a href=""></a><span class="fu">pheatmap</span>(</span>
+<span id="cb188-2"><a href=""></a>    df.norm.names[, df.fenotipos<span class="sc">$</span>sample.id],</span>
+<span id="cb188-3"><a href=""></a>    <span class="at">scale =</span> <span class="st">'row'</span>,</span>
+<span id="cb188-4"><a href=""></a>    <span class="at">cutree_cols =</span>  <span class="dv">2</span>,</span>
+<span id="cb188-5"><a href=""></a>    <span class="at">cutree_rows =</span> <span class="dv">2</span>,</span>
+<span id="cb188-6"><a href=""></a>    <span class="at">color =</span> <span class="fu">colorRampPalette</span>(</span>
+<span id="cb188-7"><a href=""></a>        <span class="fu">c</span>(<span class="st">"steelblue"</span>, </span>
+<span id="cb188-8"><a href=""></a>            <span class="st">"white"</span>, </span>
+<span id="cb188-9"><a href=""></a>            <span class="st">"firebrick3"</span>)</span>
+<span id="cb188-10"><a href=""></a>        )(<span class="dv">100</span>),</span>
+<span id="cb188-11"><a href=""></a>    <span class="at">annotation_col =</span> coldata,</span>
+<span id="cb188-12"><a href=""></a>    <span class="at">labels_row =</span> df.norm.names<span class="sc">$</span>genes.names</span>
+<span id="cb188-13"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="usaR_files/figure-revealjs/unnamed-chunk-80-1.png" width="960"></p>
 </figure>
 </div>
 </div>

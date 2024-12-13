@@ -6,6 +6,8 @@ format:
     revealjs:
         theme: simple
         highlight-style: dracula
+execute:
+    cache: true
 ---
 
 ## ¿Qué es "programar"?
@@ -996,5 +998,103 @@ pheatmap(df.norm,
                 "firebrick3")
             )(100),
         annotation_col = coldata
+)
+```
+
+## Convertir Ensembl ID {.smaller}
+
+Convertir **Ensembl ID** a gene **Symbol**. En este caso vamos a usar el paquete de Bioconductor [**org.Dm.eg.db**](https://www.bioconductor.org/packages/release/data/annotation/html/org.Dm.eg.db.html)
+
+```{.r}
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("org.Dm.eg.db")
+```
+
+## Convertir Ensembl ID {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+library(org.Dm.eg.db)
+
+keytypes(org.Dm.eg.db)
+```
+
+. . .
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+head(df.norm)
+```
+
+## Convertir Ensembl ID {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+genes.names <- mapIds(org.Dm.eg.db, 
+                      keys = rownames(df.norm), 
+                      keytype = 'ENSEMBL', 
+                      column = 'SYMBOL')
+
+genes.names
+```
+
+## Convertir Ensembl ID {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+genes.names <- as.data.frame(genes.names)
+
+head(genes.names)
+```
+
+. . .
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+head(df.norm)
+```
+
+## Convertir Ensembl ID {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+df.norm.names <- merge(df.norm, genes.names, by = 'row.names')
+
+head(df.norm.names)
+```
+. . .
+
+## Heatmap {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| fig-height: 10
+
+pheatmap(
+    df.norm.names[, df.fenotipos$sample.id],
+    scale = 'row',
+    cutree_cols =  2,
+    cutree_rows = 2,
+    color = colorRampPalette(
+        c("steelblue", 
+            "white", 
+            "firebrick3")
+        )(100),
+    annotation_col = coldata,
+    labels_row = df.norm.names$genes.names
 )
 ```
